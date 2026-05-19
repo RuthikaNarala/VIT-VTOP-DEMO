@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VTOP | VIT-AP University</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, Arial, sans-serif;
+}
+body{
+    background:#eef2f5;
+    overflow:hidden;
+}
+.topbar{
+    height:56px;
+    background:linear-gradient(to right,#2c7ac9,#0b3c6d);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 16px;
+}
+.top-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.top-left span{cursor:pointer;font-size:20px}
+.top-center input{
+    width:260px;
+    padding:6px 10px;
+    border:none;
+    border-radius:4px;
+}
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.top-right img{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+}
+.wrapper{
+    display:flex;
+    height:calc(100vh - 56px);
+}
+.iconbar{
+    width:46px;
+    background:#fff;
+    border-right:1px solid #ddd;
+}
+.icon{
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+.icon:hover{background:#eaf2ff}
+.menu{
+    position:absolute;
+    left:46px;
+    top:56px;
+    width:330px;
+    height:calc(100vh - 56px);
+    background:#fff;
+    box-shadow:2px 0 12px rgba(0,0,0,.15);
+    display:none;
+    overflow-y:auto;
+}
+.menu-header{
+    padding:14px;
+    color:#fff;
+    font-weight:600;
+    background:linear-gradient(to right,#2c7ac9,#0b3c6d);
+}
+.menu-item{
+    padding:14px 18px;
+    border-bottom:1px solid #eee;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+}
+.submenu{
+    display:none;
+    background:#f9fafc;
+}
+.submenu div{
+    padding:10px 36px;
+    font-size:14px;
+    border-bottom:1px solid #e5e5e5;
+}
+.main{
+    flex:1;
+    padding:16px;
+    overflow:auto;
+}
+.profile-header{
+    background:#fff;
+    padding:18px;
+    border-radius:6px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+    display:flex;
+    gap:18px;
+    margin-bottom:16px;
+}
+.profile-header img{
+    width:90px;
+    height:110px;
+    border-radius:6px;
+}
+.profile-details{
+    flex:1;
+}
+.profile-details p{
+    margin:4px 0;
+    font-size:14px;
+}
+.section{
+    background:#fff;
+    border-radius:6px;
+    margin-bottom:12px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+.section-header{
+    padding:12px 16px;
+    background:linear-gradient(to right,#2c7ac9,#0b3c6d);
+    color:#fff;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+}
+.section-body{
+    display:none;
+    padding:12px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+}
+td{
+    padding:8px;
+    border:1px solid #ddd;
+}
+td:first-child{
+    background:#e0e0e0;
+    width:30%;
+}
+td:last-child{
+    background:#fff6e5;
+}
+</style>
+</head>
+
+<body>
+<div class="topbar">
+    <div class="top-left">
+        <span onclick="toggleMenu()">☰</span>
+        <strong>VIT-AP UNIVERSITY</strong>
+    </div>
+    <div class="top-center">
+        <input placeholder="Search...">
+    </div>
+    <div class="top-right">
+        <img src="https://imgs.search.brave.com/KAOs64-HAzq0D2HeCpeCbVFXc5_BJZlb79BYfo8M3WI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM2/NTYwMTg0OC9waG90/by9wb3J0cmFpdC1v/Zi1hLXlvdW5nLXdv/bWFuLWNhcnJ5aW5n/LWhlci1zY2hvb2xi/b29rcy1vdXRzaWRl/LWF0LWNvbGxlZ2Uu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PUVWeExVWnNMMHVl/WUZGMU5peGl0Nmhn/LURraVY1MmRkR3df/b3J3OUJTSkE9">
+        <span>23BCE9079 (STUDENT)</span>
+	<button onclick="localStorage.clear(); location.reload();" style="background:#ff4444; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:13px;">Logout</button>
+    </div>
+</div>
+
+<div class="wrapper">
+
+<!-- ICON BAR -->
+<div class="iconbar">
+    <div class="icon" onclick="toggleMenu()">☰</div>
+    <div class="icon">👤</div>
+    <div class="icon">🎓</div>
+    <div class="icon">🏛</div>
+    <div class="icon">💳</div>
+    <div class="icon">🏨</div>
+</div>
+
+<!-- MENU -->
+<div class="menu" id="menu">
+    <div class="menu-header">VTOP Menu</div>
+
+    <div class="menu-item" onclick="toggleSub('myinfo')">My Info ▾</div>
+    <div class="submenu" id="myinfo">
+        <div>Profile</div>
+        <div>Credentials</div>
+        <div>Scholarships</div>
+    </div>
+
+    <div class="menu-item" onclick="toggleSub('academics')">Academics ▾</div>
+    <div class="submenu" id="academics">
+        <div>Attendance</div>
+        <div>Time Table</div>
+        <div>Course Page</div>
+        <div>Project</div>
+    </div>
+
+    <div class="menu-item" onclick="toggleSub('hostels')">Hostels ▾</div>
+    <div class="submenu" id="hostels">
+        <div>Room Info</div>
+        <div>Outing</div>
+        <div>Booking</div>
+    </div>
+
+    <div class="menu-item" onclick="toggleSub('account')">My Account ▾</div>
+    <div class="submenu" id="account">
+        <div>Change Password</div>
+        <div>Update Login ID</div>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- PROFILE -->
+<div class="profile-header">
+    <img src="https://imgs.search.brave.com/KAOs64-HAzq0D2HeCpeCbVFXc5_BJZlb79BYfo8M3WI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM2/NTYwMTg0OC9waG90/by9wb3J0cmFpdC1v/Zi1hLXlvdW5nLXdv/bWFuLWNhcnJ5aW5n/LWhlci1zY2hvb2xi/b29rcy1vdXRzaWRl/LWF0LWNvbGxlZ2Uu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PUVWeExVWnNMMHVl/WUZGMU5peGl0Nmhn/LURraVY1MmRkR3df/b3J3OUJTSkE9">
+    <div class="profile-details">
+        <p><strong>REGISTER NUMBER:</strong> 23BCE9079</p>
+        <p><strong>NAME:</strong> NARALA RUTHIKA</p>
+        <p><strong>PROGRAM:</strong> B.Tech CSE (AI & ML)</p>
+        <p><strong>SCHOOL:</strong> School of Computer Science & Engineering</p>
+        <p><strong>EMAIL:</strong> ruthika.23bce9079@vitapstudent.ac.in</p>
+    </div>
+</div>
+
+<!-- PERSONAL INFO -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        PERSONAL INFORMATION <span>▾</span>
+    </div>
+    <div class="section-body">
+        <table>
+            <tr><td>Date of Birth</td><td>08-Jul-2006</td></tr>
+            <tr><td>Gender</td><td>Female</td></tr>
+            <tr><td>Blood Group</td><td>O-</td></tr>
+            <tr><td>Nationality</td><td>Indian</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- EDUCATION -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        EDUCATIONAL INFORMATION <span>▾</span>
+    </div>
+    <div class="section-body">
+        <table>
+            <tr><td>Qualification</td><td>12th Intermediate</td></tr>
+            <tr><td>School</td><td>Excellencia Junior College</td></tr>
+            <tr><td>Board</td><td>TSBIE</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- PROCTOR -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        PROCTOR INFORMATION <span>▾</span>
+    </div>
+    <div class="section-body">
+        <table>
+            <tr><td>Faculty Name</td><td>S V Gomathi</td></tr>
+            <tr><td>Designation</td><td>Assistant Professor</td></tr>
+            <tr><td>Email</td><td>gomathi.sv@vitap.ac.in</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- HOSTEL -->
+<div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+        HOSTEL INFORMATION <span>▾</span>
+    </div>
+    <div class="section-body">
+        <table>
+            <tr><td>Block</td><td>LH-1</td></tr>
+            <tr><td>Room No</td><td>223</td></tr>
+            <tr><td>Bed Type</td><td>5-Bed AC</td></tr>
+        </table>
+    </div>
+</div>
+
+</div>
+</div>
+
+<script>
+function toggleMenu(){
+    const m=document.getElementById("menu");
+    m.style.display=m.style.display==="block"?"none":"block";
+}
+function toggleSub(id){
+    const s=document.getElementById(id);
+    s.style.display=s.style.display==="block"?"none":"block";
+}
+function toggleSection(el){
+    const body=el.nextElementSibling;
+    body.style.display=body.style.display==="block"?"none":"block";
+}
+</script>
+<script>
+  const TOKEN = localStorage.getItem('token');
+
+  if (!TOKEN) {
+    const reg = prompt('Enter Register Number:');
+    const pass = prompt('Enter Password:');
+
+    fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ register_number: reg, password: pass })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        alert('Login Successful! Welcome ' + data.name);
+        location.reload();
+      } else {
+        alert('Login Failed: ' + data.message);
+      }
+    });
+  } else {
+    fetch('http://localhost:5000/api/student/profile', {
+      headers: { Authorization: 'Bearer ' + TOKEN }
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('Student Data:', data);
+      alert('Welcome back ' + data.student.name + '!');
+    });
+  }
+</script>
+
+</body>
+</html>
